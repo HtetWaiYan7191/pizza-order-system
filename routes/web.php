@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\User\AjaxController;
 use App\Http\Controllers\User\UserController;
 
 /*
@@ -111,6 +113,10 @@ Route::group(['prefix' => 'user' , 'middleware' => 'user_auth'],function(){
             Route::get('viewPage',[UserController::class,'viewPage'])->name('user#viewPage');
             Route::get('editPage',[UserController::class,'editPage'])->name('user#editPage');
             Route::post('update/{id}',[UserController::class,'update'])->name('user#update');
+        });
+
+        Route::prefix('ajax')->group(function(){
+            Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');
         });
 
     });
