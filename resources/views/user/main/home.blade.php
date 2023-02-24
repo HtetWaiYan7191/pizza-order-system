@@ -20,9 +20,13 @@
 
                         </div>
 
+                        <div class=" d-flex align-items-center justify-content-between mb-3">
+                            <a href="{{ route('user#homePage')}}" class="text-dark"><label for="" class="">All</label></a>
+                        </div>
+
                         @foreach ($categories as $category)
-                            <div class="custom-control d-flex align-items-center justify-content-between mb-3">
-                                <label for="" class="">{{ $category->name }}</label>
+                            <div class=" d-flex align-items-center justify-content-between mb-3">
+                                <a href="{{ route('user#filter',$category->id)}}" class="text-dark"><label for="" class="">{{ $category->name }}</label></a>
                             </div>
                         @endforeach
                     </form>
@@ -153,6 +157,7 @@
                         </div>
                     </div>
                     <span id="dataList" class="row">
+                        @if (count($pizzas) != 0)
                         @foreach ($pizzas as $pizza)
                         <div class="col-lg-4 col-md-6 col-sm-6 pb-1 " >
                             <div class="product-item bg-light mb-4" id="myForm">
@@ -179,6 +184,10 @@
                             </div>
                         </div>
                     @endforeach
+                        @else
+                        <h1 class="text-center bg-warning fs-5 text-white p-4 col-6 offset-3 ">There is no Pizzas</h1>
+                        @endif
+
                     </span>
 
                 </div>

@@ -17,7 +17,14 @@ class UserController extends Controller
 {
     //USER MAIN HOMEPAGE
     public function homePage(){
-        $pizzas = Product::orderBy('id','desc')->get();
+        $pizzas = Product::orderBy('created_at','desc')->get();
+        $categories = Category::get();
+        return view ('user.main.home',compact('pizzas','categories'));
+    }
+
+    //USER FILTER PAGE
+    public function filter($categoryId){
+        $pizzas = Product::where('category_id',$categoryId)->orderBy('created_at','desc')->get();
         $categories = Category::get();
         return view ('user.main.home',compact('pizzas','categories'));
     }
