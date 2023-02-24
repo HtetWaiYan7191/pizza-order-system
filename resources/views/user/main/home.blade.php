@@ -212,8 +212,8 @@
         //     })
         // });
 
-
-        $('#sortingOption').change(function() {
+$(document).ready(function(){
+    $('#sortingOption').change(function() {
             $eventOption = $('#sortingOption').val();
 
             if ($eventOption == 'asc') {
@@ -297,5 +297,7 @@
                 })
             }
         })
+});
+
     </script>
 @endsection

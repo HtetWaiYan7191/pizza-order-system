@@ -108,6 +108,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'user_auth'],function(){
         //PIZZA
         Route::prefix('pizza')->group(function(){
             Route::get('details/{id}',[UserController::class,'pizzaDetails'])->name('pizza#details');
+
         });
 
         //USER PASSWORD PAGE
@@ -126,6 +127,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'user_auth'],function(){
 
         Route::prefix('ajax')->group(function(){
             Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');
+            Route::get('addToCart',[AjaxController::class,'addToCart'])->name('ajax#addToCart');
         });
 
     });
