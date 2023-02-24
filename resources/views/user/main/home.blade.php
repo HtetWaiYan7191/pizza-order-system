@@ -167,11 +167,9 @@
                                     <div class="product-action">
                                         <a class="btn btn-outline-dark btn-square" href=""><i
                                                 class="fa fa-shopping-cart"></i></a>
-                                        <a class="btn btn-outline-dark btn-square" href=""><i
+                                        <a class="btn btn-outline-dark btn-square" href="{{ route('pizza#details',$pizza->id)}}"><i
                                                 class="fa-solid fa-circle-info"></i></a>
-                                        {{-- <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                                                <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a> --}}
+
                                     </div>
                                 </div>
                                 <div class="text-center py-4">

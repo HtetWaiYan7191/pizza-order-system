@@ -82,6 +82,13 @@ class UserController extends Controller
             return redirect()->route('user#viewPage')->with(['updateSuccess' => 'User Account Updated']);
     }
 
+    //DIRECT PIZZA DETAILS
+    public function pizzaDetails($pizzaId){
+        $pizzas = Product::where('id',$pizzaId)->first();
+        $pizzaList = Product::get();
+        return view('user.main.details',compact('pizzas','pizzaList'));
+    }
+
     // USER VALIDATION CHECK
     private function userValidationCheck($request){
         Validator::make($request->all(),[

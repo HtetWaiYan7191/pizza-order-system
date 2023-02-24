@@ -103,6 +103,13 @@ Route::group(['prefix' => 'user' , 'middleware' => 'user_auth'],function(){
         //USER MAIN HOME
         Route::get('/homePage',[UserController::class,'homePage'])->name('user#homePage');
         Route::get('/filter,{id}',[UserController::class,'filter'])->name('user#filter');
+
+
+        //PIZZA
+        Route::prefix('pizza')->group(function(){
+            Route::get('details/{id}',[UserController::class,'pizzaDetails'])->name('pizza#details');
+        });
+
         //USER PASSWORD PAGE
         Route::prefix('password')->group(function(){
         Route::get('changePasswordPage',[UserController::class,'changePasswordPage'])->name('user#changePasswordPage');
