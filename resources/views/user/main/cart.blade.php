@@ -55,7 +55,7 @@
                                     </div>
                                 </td>
                                 <td class="align-middle" id="total">{{ $c->pizza_price * $c->quantity }} Kyats</td>
-                                <td class="align-middle"><button class="btn btn-sm btn-danger"><i
+                                <td class="align-middle btnRemove" ><button class="btn btn-sm btn-danger"><i
                                             class="fa fa-times"></i></button></td>
                             </tr>
                         @endforeach
@@ -94,22 +94,29 @@
 @section('scriptSource')
     <script>
         $(document).ready(function() {
-            $('.fa-plus').click(function(){
+            $('.btn-plus').click(function(){
                 $parentNode = $(this).parents("tr");
                 $price = $parentNode.find('#pizzaPrice').val();
-                $qty = Number($parentNode.find('#qty').val()) + 1 ;
+                $qty = Number($parentNode.find('#qty').val())  ;
                 $total = $price * $qty ;
                 $parentNode.find('#total').html($total + " Kyats");
 
             })
 
-            $('.fa-minus').click(function(){
+            $('.btn-minus').click(function(){
                 $parentNode = $(this).parents("tr");
                 $price = $parentNode.find('#pizzaPrice').val();
-                $qty = Number($parentNode.find('#qty').val()) - 1;
+                $qty = Number($parentNode.find('#qty').val()) ;
+
                 $total = $price * $qty ;
                 $parentNode.find('#total').html($total + " Kyats");
+            })
+
+            $('.btnRemove').click(function(){
+                $parentNode = $(this).parents("tr");
+                $parentNode.remove();
             })
         })
     </script>
 @endsection
+
