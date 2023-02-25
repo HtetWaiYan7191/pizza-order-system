@@ -111,6 +111,11 @@ Route::group(['prefix' => 'user' , 'middleware' => 'user_auth'],function(){
 
         });
 
+        //CART
+        Route::prefix('cart')->group(function(){
+            Route::get('list',[UserController::class,'cartList'])->name('user#cartList');
+        });
+
         //USER PASSWORD PAGE
         Route::prefix('password')->group(function(){
         Route::get('changePasswordPage',[UserController::class,'changePasswordPage'])->name('user#changePasswordPage');

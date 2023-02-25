@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Carbon\Carbon;
+use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
@@ -19,7 +20,8 @@ class UserController extends Controller
     public function homePage(){
         $pizzas = Product::orderBy('created_at','desc')->get();
         $categories = Category::get();
-        return view ('user.main.home',compact('pizzas','categories'));
+        $carts = Cart::where('user_id',Auth::user()->id)->get();
+        return view ('user.main.home',compact('pizzas','categories','carts'));
     }
 
     //USER FILTER PAGE
@@ -116,6 +118,37 @@ class UserController extends Controller
             'updated_at' => Carbon::now(),
         ];
 }
+
+    //USER CART LIST
+    public function cartList(){
+        $cartList = Cart::select('carts.*','products.name as pizza_name','products.price as pizza_price')
+        ->leftJoin('products','products.id','carts.product_id')
+        ->where('carts.user_id',Auth::user()->id)->get();
+
+        $totalPrice = 0;
+        foreach($cartList as $c){
+            $totalPrice += $c->pizza_price * $c->quantity;
+        }
+
+
+        return view('user.main.cart',compact('cartList','totalPrice'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     //PASSWORD VALIDATION CHECK
     private function passwordValidationCheck($request){

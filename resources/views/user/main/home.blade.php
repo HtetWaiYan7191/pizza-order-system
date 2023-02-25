@@ -126,8 +126,14 @@
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div>
-                                <button class="btn btn-sm btn-light"><i class="fa fa-th-large"></i></button>
-                                <button class="btn btn-sm btn-light ml-2"><i class="fa fa-bars"></i></button>
+                                <a href="{{ route('user#cartList')}}">
+                                    <button type="button" class="btn bg-dark position-relative">
+                                        <i class="fa-solid fa-cart-shopping text-white"></i>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{count($carts)}}
+                                        </span>
+                                      </button>
+                                </a>
                             </div>
                             <div class="ml-2">
                                 <div class="btn-group">
