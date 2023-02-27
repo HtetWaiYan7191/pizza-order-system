@@ -206,9 +206,9 @@
                     <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
                 </p>
             </div>
-            <div class="col-md-6 px-xl-0 text-center text-md-right">
+            {{-- <div class="col-md-6 px-xl-0 text-center text-md-right">
                 <img class="img-fluid" src="img/payments.png" alt="">
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- Footer End -->
@@ -226,8 +226,8 @@
     <script src="{{asset('user/lib/owlcarousel/owl.carousel.min.js')}}"></script>
 
     <!-- Contact Javascript File -->
-    <script src="{{asset('user/mail/jqBootstrapValidation.min.js')}}"></script>
-    <script src="{{asset('user/mail/contact.js')}}"></script>
+    {{-- <script src="{{asset('user/mail/jqBootstrapValidation.min.js')}}"></script> --}}
+    {{-- <script src="{{asset('user/mail/contact.js')}}"></script> --}}
 
     <!-- Template Javascript -->
     <script src="{{asset('user/js/main.js')}}"></script>

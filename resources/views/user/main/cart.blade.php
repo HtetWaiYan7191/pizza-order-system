@@ -23,6 +23,7 @@
                 <table class="table table-light table-borderless table-hover text-center mb-0" id="dataTable">
                     <thead class="thead-dark">
                         <tr>
+                            <th>Pizzas</th>
                             <th>Products</th>
                             <th>Price</th>
                             <th>Quantity</th>
@@ -33,9 +34,10 @@
                     <tbody class="align-middle">
                         @foreach ($cartList as $c)
                             <tr >
-                                <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
+                                <td class="align-middle"><img src="{{asset('storage/'.$c->pizza_image)}}" class=" img-thumbnail" alt="" style="width: 100px;"></td>
+                                <td class="align-middle">
                                     {{ $c->pizza_name }}</td>
-                                <td class="align-middle" id="pizzaPrice" >{{ $c->pizza_price }} Kyats</td>
+                                <td class="align-middle col-3"id="pizzaPrice" >{{ $c->pizza_price }} Kyats</td>
                                 {{-- <input type="hidden" name="" value="{{$c->pizza_price}}" id="pizzaPrice"> --}}
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
