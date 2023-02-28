@@ -28,7 +28,8 @@ class UserController extends Controller
     public function filter($categoryId){
         $pizzas = Product::where('category_id',$categoryId)->orderBy('created_at','desc')->get();
         $categories = Category::get();
-        return view ('user.main.home',compact('pizzas','categories'));
+        $carts = Cart::where('user_id',Auth::user()->id)->get();
+        return view ('user.main.home',compact('pizzas','categories','carts'));
     }
 
     //USER CHANGE PASSWORD PAGE
