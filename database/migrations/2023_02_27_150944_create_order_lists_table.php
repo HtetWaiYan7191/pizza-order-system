@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('product_id');
             $table->integer('qty');
             $table->integer('total');
-            $table->integer('order_code');
+            $table->string('order_code');
             $table->timestamps();
         });
     }

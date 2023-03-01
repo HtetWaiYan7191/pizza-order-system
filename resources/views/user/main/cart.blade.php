@@ -74,7 +74,7 @@
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between mb-3">
                             <h6>Subtotal</h6>
-                            <h6 id="subTotalPrice">{{ $totalPrice }}</h6>
+                            <h6 id="subTotalPrice">{{ $totalPrice }} Kyats</h6>
                         </div>
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">Delivery</h6>
