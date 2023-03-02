@@ -33,13 +33,15 @@
                     </thead>
                     <tbody class="align-middle">
                         @foreach ($cartList as $c)
-                            <tr >
-                                <td class="align-middle"><img src="{{asset('storage/'.$c->pizza_image)}}" class=" img-thumbnail" alt="" style="width: 100px;"></td>
+                            <tr>
+                                <td class="align-middle"><img src="{{ asset('storage/' . $c->pizza_image) }}"
+                                        class=" img-thumbnail" alt="" style="width: 100px;"></td>
                                 <td class="align-middle">
                                     {{ $c->pizza_name }}</td>
-                                    <input type="hidden" id="productId" value="{{ $c->product_id}}">
-                                    <input type="hidden" id="userId" id="userId" value="{{ $c->user_id}}">
-                                <td class="align-middle col-3"id="pizzaPrice" >{{ $c->pizza_price }} Kyats</td>
+                                <input type="hidden" name="" id="orderId" value="{{ $c->id}}">
+                                <input type="hidden" id="productId" value="{{ $c->product_id }}">
+                                <input type="hidden" id="userId" value="{{ $c->user_id }}">
+                                <td class="align-middle col-3"id="pizzaPrice">{{ $c->pizza_price }} Kyats</td>
                                 {{-- <input type="hidden" name="" value="{{$c->pizza_price}}" id="pizzaPrice"> --}}
                                 <td class="align-middle">
                                     <div class="input-group quantity mx-auto" style="width: 100px;">
@@ -59,7 +61,7 @@
                                     </div>
                                 </td>
                                 <td class="align-middle" id="total">{{ $c->pizza_price * $c->quantity }} Kyats</td>
-                                <td class="align-middle btnRemove" ><button class="btn btn-sm btn-danger"><i
+                                <td class="align-middle btnRemove"><button class="btn btn-sm btn-danger"><i
                                             class="fa fa-times"></i></button></td>
                             </tr>
                         @endforeach
@@ -86,7 +88,12 @@
                             <h5>Total</h5>
                             <h5 id="finalTotal">{{ $totalPrice + 3000 }}</h5>
                         </div>
-                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" id="orderBtn">Proceed To Checkout</button>
+                        <button class="btn btn-block btn-primary font-weight-bold my-3 py-3" id="orderBtn">Proceed To
+                            Checkout</button>
+
+                        <button class="btn btn-block bg-danger text-white font-weight-bold my-3 py-3" id="clearBtn">Clear
+                            Cart</button>
+
                     </div>
                 </div>
             </div>
@@ -96,37 +103,83 @@
 @endsection
 
 @section('scriptSource')
-    <script src="{{ asset('js/cart.js')}}"></script>
+    <script src="{{ asset('js/cart.js') }}"></script>
     <script>
-        $('#orderBtn').click(function(){
-            $orderList =[];
-            $random = Math.floor(Math.random() * 100000 )+1;
+        $('#orderBtn').click(function() {
+            $orderList = [];
+            $random = Math.floor(Math.random() * 100000) + 1;
 
 
-            $('#dataTable tbody tr').each(function(index,row){
+            $('#dataTable tbody tr').each(function(index, row) {
 
                 $orderList.push({
-                    'user_id' : $(row).find('#userId').val(),
-                    'product_id' : $(row).find('#productId').val(),
-                    'qty' : $(row).find('#qty').val(),
-                    'total' : $(row).find('#total').text().replace('Kyats','')*1,
-                    'order_code' : $random
+                    'user_id': $(row).find('#userId').val(),
+                    'product_id': $(row).find('#productId').val(),
+                    'qty': $(row).find('#qty').val(),
+                    'total': $(row).find('#total').text().replace('Kyats', '') * 1,
+                    'order_code': "POS" + $random,
                 });
             });
 
             $.ajax({
-                type:'get',
-                url:'http://127.0.0.1:8000/user/ajax/order',
-                data:Object.assign({},$orderList),
-                dataType:'json',
-                success: function(response){
-                    if(response.status == 'true'){
+                type: 'get',
+                url: 'http://127.0.0.1:8000/user/ajax/order',
+                data: Object.assign({}, $orderList),
+                dataType: 'json',
+                success: function(response) {
+                    if (response.status == 'true') {
                         window.location.href = 'http://127.0.0.1:8000/user/homePage';
                     }
                 }
             })
 
+
+
+        })
+
+        $('#clearBtn').click(function() {
+
+            $('#dataTable tbody tr').remove();
+            $('#subTotalPrice').html("0 Kyats");
+            $('#finalTotal').html('0 Kyats');
+
+            $.ajax({
+                type: 'get',
+                url: 'http://127.0.0.1:8000/user/ajax/clear/cart',
+                dataType: 'json',
+
+            })
+        })
+
+        //REMOVE CURRENT PRODUCT IN CART
+
+        $('.btnRemove').click(function() {
+            //remove button click
+            $parentNode = $(this).parents("tr");
+            $productId = $parentNode.find('#productId').val();
+            $orderId = $parentNode.find('#orderId').val();
+            console.log($productId,$orderId);
+
+            $.ajax({
+                type: 'get',
+                url: 'http://127.0.0.1:8000/user/ajax/clear/current/product',
+                data: {'productId' : $productId, ' orderId' : $orderId},
+                dataType: 'json',
+
+
+            })
+
+            $parentNode.remove();
+            $totalPrice = 0;
+            $('#dataTable tbody tr').each(function(index, row) {
+                $totalPrice += Number($(row).find('#total').text().replace("Kyats", ""));
+
+            })
+
+            $('#subTotalPrice').html(`${$totalPrice} Kyats`);
+            $('#finalTotal').html(`${$totalPrice + 3000} Kyats`);
+
+
         })
     </script>
 @endsection
-

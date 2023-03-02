@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Carbon\Carbon;
 use App\Models\Cart;
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -30,6 +31,12 @@ class UserController extends Controller
         $categories = Category::get();
         $carts = Cart::where('user_id',Auth::user()->id)->get();
         return view ('user.main.home',compact('pizzas','categories','carts'));
+    }
+
+    //HISTORY PAGE
+    public function history(){
+        $orders = Order::where('user_id',Auth::user()->id)->paginate(4);
+        return view('user.main.history',compact('orders'));
     }
 
     //USER CHANGE PASSWORD PAGE

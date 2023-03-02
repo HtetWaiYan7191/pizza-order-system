@@ -103,6 +103,7 @@ Route::group(['prefix' => 'user' , 'middleware' => 'user_auth'],function(){
         //USER MAIN HOME
         Route::get('/homePage',[UserController::class,'homePage'])->name('user#homePage');
         Route::get('/filter,{id}',[UserController::class,'filter'])->name('user#filter');
+        Route::get('/history',[UserController::class,'history'])->name('user#history');
 
 
         //PIZZA
@@ -134,6 +135,8 @@ Route::group(['prefix' => 'user' , 'middleware' => 'user_auth'],function(){
             Route::get('pizza/list',[AjaxController::class,'pizzaList'])->name('ajax#pizzaList');
             Route::get('addToCart',[AjaxController::class,'addToCart'])->name('ajax#addToCart');
             Route::get('order',[AjaxController::class,'order'])->name('ajax#order');
+            Route::get('clear/cart',[AjaxController::class,'clearCart'])->name('ajax#clearCart');
+            Route::get('clear/current/product',[AjaxController::class,'clearCurrentProduct'])->name('ajax#clearCurrentProduct');
         });
 
     });

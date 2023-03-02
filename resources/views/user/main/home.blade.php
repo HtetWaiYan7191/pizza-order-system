@@ -126,15 +126,26 @@
                     <div class="col-12 pb-1">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <div>
-                                <a href="{{ route('user#cartList')}}">
-                                    <button type="button" class="btn bg-dark position-relative">
+                                <a href="{{ route('user#cartList')}}" class="">
+                                    <button type="button" class="btn bg-dark position-relative me-2 rounded">
                                         <i class="fa-solid fa-cart-shopping text-white"></i>
                                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                             {{count($carts)}}
                                         </span>
                                       </button>
                                 </a>
+
+                                <a href="{{ route('user#history')}}">
+                                    <button type="button" class="btn bg-dark position-relative">
+                                        <i class="fa-sharp fa-solid fa-clock-rotate-left text-white"></i>
+                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                            {{count($carts)}}
+                                        </span>
+                                      </button>
+                                </a>
                             </div>
+
+
                             <div class="ml-2">
                                 <div class="btn-group">
                                     {{-- <button type="button" class="btn btn-sm btn-light dropdown-toggle"

@@ -24,14 +24,7 @@ $(document).ready(function() {
         summaryCalculation();
     })
 
-    $('.btnRemove').click(function(){
-        //remove button click
-        $parentNode = $(this).parents("tr");
-        $parentNode.remove();
 
-        summaryCalculation();
-
-    })
 
     function summaryCalculation(){
         //calculate final total
@@ -45,3 +38,5 @@ $(document).ready(function() {
         $('#finalTotal').html(`${$totalPrice + 3000} Kyats`);
     }
 })
+
+
